@@ -3,6 +3,7 @@ UI functions dedicated to the Bitbucket modal panel
 */
 
 var bitbucket_api = 'https://api.bitbucket.org/1.0'
+var bitbucket_endpoints = {}
 var spinner = (new Spinner(spin_opts)).spin();
 var template = null;
 var url = null;
@@ -20,9 +21,9 @@ $('a[id^="Bitbucket-link"]').click(function (e)
 function showBitbucket(e, t) {
     url = t.href;
     var bitbucket_profile = $("#bitbucket-profile");
-    var bitbucket_api_user = bitbucket_api + '/users/' + bitbucket_username;
-    var bitbucket_api_followers = bitbucket_api_user + '/followers';
-    var bitbucket_api_repositories = bitbucket_api_user + '/repositories/' + bitbucket_username;
+    bitbucket_endpoints['user'] = bitbucket_api + '/users/' + bitbucket_username;
+    bitbucket_endpoints['followers'] = bitbucket_endpoints['user'] + '/followers';
+    bitbucket_endpoints['repositories'] = bitbucket_endpoints['user'] + '/repositories/' + bitbucket_username;
     if (bitbucket_profile.length > 0) {
         bitbucket_profile.modal('show');
     }
@@ -35,7 +36,7 @@ function showBitbucket(e, t) {
 
             try {
                 $.ajax({
-                    url: bitbucket_api_user,
+                    url: bitbucket_endpoints['user'],
                     dataType: "jsonp",
                     jsonpCallback: "readBitbucketData",
                     error: function(s, statusCode, errorThrown) {
@@ -57,17 +58,22 @@ function showBitbucket(e, t) {
 }
 
 function readBitbucketData(user) {
-    try {
-        $.extend(bitbucket_data, user);
+    $.extend(bitbucket_data, user);
+    $.ajax({
+        url: bitbucket_endpoints['followers'],
+        dataType: "jsonp",
+        jsonpCallback: "readFollowers",
+        error: function(s, statusCode, errorThrown) {
+            window.location.href = url;
+            spinner.stop();
+        }
+    });
+}
 
-        var html = template(bitbucket_data);
-        $('body').append(html);
-        $("#bitbucket-profile").modal();
-        spinner.stop();
-
-    }
-    catch (err) {
-        window.location.href = url;
-        spinner.stop();
-    }
+function readFollowers(followers) {
+    bitbucket_data['user']['followers'] = followers['count'];
+    var html = template(bitbucket_data);
+    $('body').append(html);
+    $("#bitbucket-profile").modal();
+    spinner.stop();
 }
