@@ -60,7 +60,7 @@
   </h3>
 </div>
 
-{% assets filters="rjsmin", output="gen/packed.js", "js/libs/jquery-1.7.2.min.js", "js/libs/jquery.url.js", "js/libs/bootstrap-modal.js", "js/libs/handlebars.js", "js/libs/spin.min.js", "js/libs/moment.min.js", "js/common.js", "js/libs/github.js", "js/libs/google+.js", "js/libs/twitter.js", "js/libs/instagram.js" %}
+{% assets filters="rjsmin", output="gen/packed.js", "js/libs/jquery-1.7.2.min.js", "js/libs/jquery.url.js", "js/libs/bootstrap-modal.js", "js/libs/handlebars.js", "js/libs/spin.min.js", "js/libs/moment.min.js", "js/common.js", "js/libs/github.js", "js/libs/google+.js", "js/libs/twitter.js", "js/libs/instagram.js", "js/libs/bitbucket.js"  %}
     <script src="{{ ASSET_URL }}"></script>
 {% endassets %}
 
@@ -91,6 +91,10 @@
 
 {% if TWITTER_INTEGRATION_ENABLED %}
     var twitter_username = '{{ TWITTER_USERNAME }}';
+{% endif %}
+
+{% if BITBUCKET_INTEGRATION_ENABLED %}
+    var bitbucket_username = '{{ BITBUCKET_USERNAME }}';
 {% endif %}
 
 {% if INSTAGRAM_INTEGRATION_ENABLED %}
