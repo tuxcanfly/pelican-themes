@@ -34,12 +34,6 @@
     {{#if logo }}
     <a href="http://bitbucket.org/{{ owner }}/{{ slug }}" class="profile-repo-logo"><img src="{{ logo }}" alt="{{ name }}" /></a>
     {{/if}}
-    {{#if fork_of}}
-    <p class="profile-repo-fork">
-      <a href="http://bitbucket.org/{{ fork_of.owner }}/{{ fork_of.slug }}">Fork of {{ fork_of.owner}} / {{ fork_of.name }}</a>
-      <a href="http://bitbucket.org/{{ fork_of.owner }}/{{ fork_of.slug }}/zealots" class="profile-watchers">{{ fork_of.followers_count }}</a>
-    </p>
-    {{/if}}
     <p class="profile-repo-text">
       {{ description }}
     </p>
@@ -50,6 +44,12 @@
       <li><a href="http://bitbucket.org/{{ owner }}/{{ slug }}/descendants" class="profile-forks">{{ forks_count }}</a></li>
       {{/if}}
     </ul>
+    {{#if fork_of}}
+    <p class="profile-repo-fork">
+      <a href="http://bitbucket.org/{{ fork_of.owner }}/{{ fork_of.slug }}">Fork of {{ fork_of.owner}} / {{ fork_of.name }}</a>
+      <a href="http://bitbucket.org/{{ fork_of.owner }}/{{ fork_of.slug }}/zealots" class="profile-watchers">{{ fork_of.followers_count }}</a>
+    </p>
+    {{/if}}
     </li>
     {{/each}}
   </ul>
