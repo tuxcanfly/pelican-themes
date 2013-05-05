@@ -16,8 +16,6 @@
 	<hgroup>
 	
 	<h2><a href="{{SITEURL}}/{{article.url}}">{{article.title}}</a></h2>
-	{% include "twitter.html" %}
-	{% include "google_plusone.html" %}
     {{ translations.translate(article) }}
 	</hgroup>
 	{{article.content}}

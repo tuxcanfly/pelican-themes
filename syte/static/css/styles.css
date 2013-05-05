@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Oxygen);
+
 html,body {
 margin:0;
 padding:0;
@@ -19,7 +21,7 @@ font-style:italic;
 
 body {
 line-height:1;
-font-family:Helvetica Neue,Helvetica,Arial,sans-serif;
+font-family:'Oxygen', sans-serif;
 font-size:15px;
 color:#404040;
 }
@@ -1108,7 +1110,7 @@ padding:5px 0;
 .blog-section article {
 width:95%;
 border-bottom:1px solid #c2c2c2;
-padding:10px 10px 30px;
+padding:10px 10px 30px 30px;
 }
 
 .blog-section article img {
@@ -1345,7 +1347,7 @@ padding:5px 0;
 .blog-section article {
 width:95%;
 border-bottom:1px solid #c2c2c2;
-padding:10px 10px 30px;
+padding:10px 10px 30px 30px;
 }
 
 .blog-section article img {
